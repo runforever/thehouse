@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  spider:
+    image: hub.defcoding.com/caterpillar:latest
+    command: flask run --host=0.0.0.0
+    volumes:
+      - .:/code
+    environment:
+      - PYTHONPATH=/code
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+    network_mode: bridge
+    ports:
+      - "5000:5000"
+    external_links:
+      - product_postgres:postgres
